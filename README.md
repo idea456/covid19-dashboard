@@ -1,4 +1,4 @@
-# covid19-dashboard
+# 🦠📈 Covid19-dashboard
 
 > A dashboard for viewing a country&#39;s covid-19 data 
 
