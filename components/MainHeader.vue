@@ -16,8 +16,14 @@
     </nav>
     <v-navigation-drawer absolute temporary v-model="drawer">
       <v-list-item>
+        <v-list-item-content>
+          <v-subheader>CURRENT COUNTRY</v-subheader>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-list-item>
         <v-list-item-avatar tile>
-          <v-img src="https://www.countryflags.io/ID/shiny/64.png"></v-img>
+          <v-img src="https://www.countryflags.io/ID/shiny/64.png" />
         </v-list-item-avatar>
 
         <v-list-item-content>
@@ -27,8 +33,16 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list dense nav class="py-0">
-        <v-list-item <v-list-item link v-for="item in items" :key="item.title">
+      <v-divider></v-divider>
+
+      <v-list dense nav>
+        <v-list-item
+          <v-list-item
+          link
+          v-for="item in items"
+          :key="item.title"
+          :to="item.link"
+        >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -44,19 +58,26 @@
 
 <script>
 export default {
-  mounted() {
-    console.log("hii im mounted!");
-  },
+  name: "MainHeader",
   data() {
     return {
       drawer: false,
       items: [
-        { title: "Dashboard", icon: "mdi-view-dashboard" },
-        { title: "View in Github", icon: "mdi-github" }
+        { title: "Dashboard", icon: "mdi-view-dashboard", link: "" },
+        {
+          title: "View in Github",
+          icon: "mdi-github",
+          link: "https://github.com/idea456/covid19-dashboard"
+        }
       ]
     };
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.nd-title {
+  font-weight: bold;
+  font-size: 20px;
+}
+</style>
