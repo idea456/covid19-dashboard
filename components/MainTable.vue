@@ -1,5 +1,10 @@
 <template>
-  <v-data-table :headers="headers" :items="desserts" class="elevation-3">
+  <v-data-table
+    :headers="headers"
+    :items="desserts"
+    :items-per-page="5"
+    class="elevation-3"
+  >
     <template v-slot:item.calories="{ item }">
       <v-chip :color="getColor(item.calories)" dark>{{ item.calories }}</v-chip>
     </template>

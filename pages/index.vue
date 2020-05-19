@@ -39,6 +39,7 @@
 
     <v-row justify="space-between" align="center">
       <MainTable class="main-table" />
+      <MainNews class="main-news" />
     </v-row>
   </v-container>
 </template>
@@ -46,10 +47,12 @@
 <script>
 import StatusCard from "../components/StatusCard";
 import MainTable from "../components/MainTable";
+import MainNews from "../components/MainNews";
 export default {
   components: {
     StatusCard,
-    MainTable
+    MainTable,
+    MainNews
   },
   data() {
     return {
@@ -70,6 +73,11 @@ export default {
 }
 
 .main-table {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.main-news {
   margin-top: 30px;
   margin-bottom: 20px;
 }
