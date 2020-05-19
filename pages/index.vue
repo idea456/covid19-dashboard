@@ -37,15 +37,19 @@
       <StatusCard title="Active" number="12" color="orange" />
     </v-row>
 
-    <v-row> </v-row>
+    <v-row justify="space-between" align="center">
+      <MainTable class="main-table" />
+    </v-row>
   </v-container>
 </template>
 
 <script>
 import StatusCard from "../components/StatusCard";
+import MainTable from "../components/MainTable";
 export default {
   components: {
-    StatusCard
+    StatusCard,
+    MainTable
   },
   data() {
     return {
@@ -63,5 +67,10 @@ export default {
 
 .dashboard-status-cards {
   text-align: center;
+}
+
+.main-table {
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 </style>

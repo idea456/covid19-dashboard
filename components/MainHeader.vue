@@ -3,7 +3,7 @@
     <nav>
       <v-toolbar>
         <v-app-bar-nav-icon @click="drawer = !drawer" />
-        <v-toolbar-title>Covid-19 Dashboard</v-toolbar-title>
+        <v-toolbar-title>🦠📈 Covid-19 Dashboard</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-text-field
           label="Search for a country..."
