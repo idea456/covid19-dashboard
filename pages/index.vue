@@ -7,13 +7,15 @@
             <v-img
               height="70"
               contain
-              src="https://www.countryflags.io/ID/shiny/64.png"
+              :src="
+                'https://www.countryflags.io/' + countryId + '/shiny/64.png'
+              "
             />
           </v-list-item-avatar>
 
           <v-list-item-content>
             <v-list-item-title>
-              <strong class="dashboard-title">Indonesia</strong>
+              <strong class="dashboard-title">{{ countryName }}</strong>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -48,7 +50,20 @@
 import StatusCard from "../components/StatusCard";
 import MainTable from "../components/MainTable";
 import MainNews from "../components/MainNews";
+import countries from "i18n-iso-countries";
+
 export default {
+  computed: {
+    countryName() {
+      return countries.getName(this.$store.state.country, "en");
+    },
+    countryId() {
+      return this.$store.state.country;
+    }
+  },
+  mounted() {
+    countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
+  },
   components: {
     StatusCard,
     MainTable,

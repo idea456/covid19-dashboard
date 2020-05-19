@@ -7,10 +7,11 @@
         <v-spacer></v-spacer>
         <v-text-field
           label="Search for a country..."
+          v-model="textCountry"
           hide-details
           single-line
         ></v-text-field>
-        <v-btn icon>
+        <v-btn icon @click="searchCountry(textCountry)">
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
 
@@ -28,12 +29,14 @@
 
       <v-list-item>
         <v-list-item-avatar tile>
-          <v-img src="https://www.countryflags.io/ID/shiny/64.png" />
+          <v-img
+            :src="'https://www.countryflags.io/' + countryId + '/shiny/64.png'"
+          />
         </v-list-item-avatar>
 
         <v-list-item-content>
           <v-list-item-title>
-            <strong>Indonesia</strong>
+            <strong>{{ countryName }}</strong>
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -62,8 +65,18 @@
 </template>
 
 <script>
+import countries from "i18n-iso-countries";
+
 export default {
   name: "MainHeader",
+  computed: {
+    countryName() {
+      return countries.getName(this.$store.state.country, "en");
+    },
+    countryId() {
+      return this.$store.state.country;
+    }
+  },
   data() {
     return {
       drawer: false,
@@ -76,6 +89,18 @@ export default {
         }
       ]
     };
+  },
+  mounted() {
+    countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
+  },
+  methods: {
+    searchCountry(newCountry) {
+      let countryCode = countries.getAlpha2Code(newCountry, "en");
+      if (countryCode === undefined) {
+        alert("invalid country!");
+      }
+      this.$store.commit("changeCountry", countryCode);
+    }
   }
 };
 </script>
