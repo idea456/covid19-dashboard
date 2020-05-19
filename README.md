@@ -1,6 +1,10 @@
 # 🦠📈 Covid19-dashboard
 
-> A dashboard for viewing a country&#39;s covid-19 data 
+> A dashboard for viewing a country&#39;s covid-19 data
+
+## Screenshots
+
+![screencapture-localhost-3000-2020-05-19-23_27_53](https://user-images.githubusercontent.com/25546711/82346071-9bb63380-9a28-11ea-9586-acafce9bbadb.png)
 
 ## Build Setup
 
