@@ -33,10 +33,10 @@
       justify="space-between"
       class="dashboard-status-cards"
     >
-      <StatusCard title="Confirmed" number="120" color="#26c6da" />
-      <StatusCard title="Deaths" number="43" color="pink" />
-      <StatusCard title="Recovered" number="33" color="light-green" />
-      <StatusCard title="Active" number="12" color="orange" />
+      <StatusCard title="Confirmed" :number="confirmed" color="#26c6da" />
+      <StatusCard title="Deaths" :number="deaths" color="pink" />
+      <StatusCard title="Recovered" :number="recovered" color="light-green" />
+      <StatusCard title="Active" :number="active" color="orange" />
     </v-row>
 
     <v-row justify="space-between" align="center">
@@ -51,6 +51,7 @@ import StatusCard from "../components/StatusCard";
 import MainTable from "../components/MainTable";
 import MainNews from "../components/MainNews";
 import countries from "i18n-iso-countries";
+import axios from "axios";
 
 export default {
   computed: {
@@ -59,6 +60,18 @@ export default {
     },
     countryId() {
       return this.$store.state.country;
+    },
+    confirmed() {
+      return this.$store.state.confirmed;
+    },
+    deaths() {
+      return this.$store.state.deaths;
+    },
+    recovered() {
+      return this.$store.state.recovered;
+    },
+    active() {
+      return this.$store.state.active;
     }
   },
   mounted() {

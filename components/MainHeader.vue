@@ -66,6 +66,7 @@
 
 <script>
 import countries from "i18n-iso-countries";
+import axios from "axios";
 
 export default {
   name: "MainHeader",
@@ -100,6 +101,18 @@ export default {
         alert("invalid country!");
       }
       this.$store.commit("changeCountry", countryCode);
+      axios
+        .get(
+          `https://api.covid19api.com/total/country/${this.$store.state.country}`
+        )
+        .then(({ data }) => {
+          this.$store.commit("setStatus", {
+            confirmed: data[data.length - 1].Confirmed,
+            deaths: data[data.length - 1].Deaths,
+            recovered: data[data.length - 1].Recovered,
+            active: data[data.length - 1].Active
+          });
+        });
     }
   }
 };

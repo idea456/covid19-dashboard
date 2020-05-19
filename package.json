@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "animated-number-vue": "^1.0.0",
+    "axios": "^0.19.2",
     "country-code-lookup": "0.0.17",
     "i18n-iso-countries": "^5.4.0",
     "nuxt": "^2.0.0"
