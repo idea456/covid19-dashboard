@@ -1,10 +1,64 @@
+import axios from "axios";
+import moment from "moment";
+
 export const state = () => ({
   country: "id",
   confirmed: 0,
   deaths: 0,
   recovered: 0,
-  active: 0
+  active: 0,
+  tableStatus: [],
+  newsTable: []
 });
+
+export const actions = {
+  async getStatus({ commit, getters }) {
+    axios
+      .get(`https://api.covid19api.com/total/country/${getters.getCountry}`)
+      .then(({ data }) => {
+        commit("setStatus", {
+          confirmed: data[data.length - 1].Confirmed,
+          deaths: data[data.length - 1].Deaths,
+          recovered: data[data.length - 1].Recovered,
+          active: data[data.length - 1].Active
+        });
+      });
+  },
+  async getStatusTable({ commit, getters, dispatch }) {
+    axios
+      .get(
+        `https://api.covid19api.com/total/dayone/country/${getters.getCountry}`
+      )
+      .then(({ data }) => {
+        let newTableStatus = [];
+        for (let i = 0; i < data.length; i++) {
+          newTableStatus.push({
+            date: moment(data[i].Date).format("MMMM Do YYYY, h:mm:ss a"),
+            deaths: data[i].Deaths,
+            recovered: data[i].Recovered,
+            active: data[i].Active,
+            cases: data[i].Confirmed
+          });
+        }
+        commit("setTableStatus", newTableStatus);
+        dispatch("getNews");
+      });
+  },
+  async getNews({ commit, getters }) {
+    axios
+      .get(
+        `
+        http://newsapi.org/v2/top-headlines?country=${getters.getCountry}&q=corona&apiKey=55d213d1ccc642ae8b9a94404b596959`
+      )
+      .then(({ data }) => commit("setNewsTable", data.articles));
+  }
+};
+
+export const getters = {
+  getCountry(state) {
+    return state.country;
+  }
+};
 
 export const mutations = {
   changeCountry(state, newCountry) {
@@ -15,5 +69,11 @@ export const mutations = {
     state.deaths = status.deaths;
     state.recovered = status.recovered;
     state.active = status.active;
+  },
+  setTableStatus(state, newTableStatus) {
+    state.tableStatus = newTableStatus;
+  },
+  setNewsTable(state, newNewsTable) {
+    state.newsTable = newNewsTable;
   }
 };

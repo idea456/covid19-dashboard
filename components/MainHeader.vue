@@ -93,26 +93,20 @@ export default {
   },
   mounted() {
     countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
+    this.$store.dispatch("getStatus");
+    this.$store.dispatch("getStatusTable");
+    this.$store.dispatch("getNews");
   },
   methods: {
     searchCountry(newCountry) {
       let countryCode = countries.getAlpha2Code(newCountry, "en");
       if (countryCode === undefined) {
         alert("invalid country!");
+      } else {
+        this.$store.commit("changeCountry", countryCode);
+        this.$store.dispatch("getStatus");
+        this.$store.dispatch("getStatusTable");
       }
-      this.$store.commit("changeCountry", countryCode);
-      axios
-        .get(
-          `https://api.covid19api.com/total/country/${this.$store.state.country}`
-        )
-        .then(({ data }) => {
-          this.$store.commit("setStatus", {
-            confirmed: data[data.length - 1].Confirmed,
-            deaths: data[data.length - 1].Deaths,
-            recovered: data[data.length - 1].Recovered,
-            active: data[data.length - 1].Active
-          });
-        });
     }
   }
 };

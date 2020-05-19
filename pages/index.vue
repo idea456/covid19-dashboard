@@ -20,13 +20,13 @@
           </v-list-item-content>
         </v-list-item>
       </v-col>
-      <v-col cols="3">
+      <!-- <v-col cols="3">
         <v-overflow-btn
           :items="dropdown_font"
           label="Select by date"
           target="#dropdown-example"
         ></v-overflow-btn
-      ></v-col>
+      ></v-col> -->
     </v-row>
     <v-row
       align="center"
