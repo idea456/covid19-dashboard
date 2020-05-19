@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="500" min-width="500" tile>
+  <v-card max-width="540" min-width="540" tile>
     <v-card-title>Latest news</v-card-title>
     <v-list max-height="300" class="overflow-y-auto">
       <v-list-item v-for="news in newsTable" :key="news.title" link two-line>

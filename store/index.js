@@ -8,7 +8,11 @@ export const state = () => ({
   recovered: 0,
   active: 0,
   tableStatus: [],
-  newsTable: []
+  newsTable: [],
+  graphConfirmed: [],
+  graphDeaths: [],
+  graphRecovered: [],
+  graphActive: []
 });
 
 export const actions = {
@@ -42,6 +46,8 @@ export const actions = {
         }
         commit("setTableStatus", newTableStatus);
         dispatch("getNews");
+        // set the graph
+        commit("setGraph", data);
       });
   },
   async getNews({ commit, getters }) {
@@ -57,6 +63,18 @@ export const actions = {
 export const getters = {
   getCountry(state) {
     return state.country;
+  },
+  getGraphConfirmed(state) {
+    return state.graphConfirmed;
+  },
+  getGraphDeaths(state) {
+    return state.graphDeaths;
+  },
+  getGraphRecovered(state) {
+    return state.graphRecovered;
+  },
+  getGraphActive(state) {
+    return state.graphActive;
   }
 };
 
@@ -75,5 +93,34 @@ export const mutations = {
   },
   setNewsTable(state, newNewsTable) {
     state.newsTable = newNewsTable;
+  },
+  setGraph(state, data) {
+    let confirmed = [];
+    let deaths = [];
+    let recovered = [];
+    let active = [];
+
+    data.map(element => {
+      confirmed.push({
+        x: element.Date,
+        y: element.Confirmed
+      });
+      deaths.push({
+        x: element.Date,
+        y: element.Deaths
+      });
+      recovered.push({
+        x: element.Date,
+        y: element.Recovered
+      });
+      active.push({
+        x: element.Date,
+        y: element.Active
+      });
+    });
+    state.graphConfirmed = confirmed;
+    state.graphDeaths = deaths;
+    state.graphRecovered = recovered;
+    state.graphActive = active;
   }
 };
