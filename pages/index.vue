@@ -20,19 +20,8 @@
           </v-list-item-content>
         </v-list-item>
       </v-col>
-      <!-- <v-col cols="3">
-        <v-overflow-btn
-          :items="dropdown_font"
-          label="Select by date"
-          target="#dropdown-example"
-        ></v-overflow-btn
-      ></v-col> -->
     </v-row>
-    <v-row
-      align="center"
-      justify="space-between"
-      class="dashboard-status-cards"
-    >
+    <v-row align="center" justify="space-between" class="dashboard-status-cards">
       <StatusCard title="Confirmed" :number="confirmed" color="#26c6da" />
       <StatusCard title="Deaths" :number="deaths" color="pink" />
       <StatusCard title="Recovered" :number="recovered" color="light-green" />
@@ -46,7 +35,7 @@
 
     <v-row justify="center" align="center">
       <v-card max-width="100%" min-width="100%" tile class="elevation-3">
-        <MainGraph />
+        <MainGraph :chart-data="datacollection" />
       </v-card>
     </v-row>
   </v-container>
@@ -63,6 +52,9 @@ import axios from "axios";
 
 export default {
   computed: {
+    datacollection() {
+      return this.$store.state.datacollection;
+    },
     countryName() {
       return countries.getName(this.$store.state.country, "en");
     },

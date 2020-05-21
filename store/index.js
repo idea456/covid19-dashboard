@@ -12,7 +12,8 @@ export const state = () => ({
   graphConfirmed: [],
   graphDeaths: [],
   graphRecovered: [],
-  graphActive: []
+  graphActive: [],
+  datacollection: null
 });
 
 export const actions = {
@@ -48,6 +49,7 @@ export const actions = {
         dispatch("getNews");
         // set the graph
         commit("setGraph", data);
+        commit("setDataCollection");
       });
   },
   async getNews({ commit, getters }) {
@@ -122,5 +124,39 @@ export const mutations = {
     state.graphDeaths = deaths;
     state.graphRecovered = recovered;
     state.graphActive = active;
+  },
+  setDataCollection(state) {
+    state.datacollection = {
+      datasets: [
+        {
+          label: "Confirmed",
+          data: state.graphConfirmed,
+          backgroundColor: "transparent",
+          borderColor: "rgba(1, 116, 188, 0.50)",
+          pointBackgroundColor: "rgba(1, 116, 188, 1)"
+        },
+        {
+          label: "Deaths",
+          data: state.graphDeaths,
+          backgroundColor: "transparent",
+          borderColor: "rgba(255,0, 87, 0.50)",
+          pointBackgroundColor: "rgba(255,0, 87, 1)"
+        },
+        {
+          label: "Recovered",
+          data: state.graphRecovered,
+          backgroundColor: "transparent",
+          borderColor: "rgba(0, 156, 139, 0.50)",
+          pointBackgroundColor: "rgba(0, 156, 139, 1)"
+        },
+        {
+          label: "Active",
+          data: state.graphActive,
+          backgroundColor: "transparent",
+          borderColor: "rgba(255, 0, 172, 0.50)",
+          pointBackgroundColor: "rgba(255, 0, 172, 1)"
+        }
+      ]
+    };
   }
 };
