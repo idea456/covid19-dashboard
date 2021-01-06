@@ -14,7 +14,7 @@
   "dependencies": {
     "@vitalets/google-translate-api": "^3.0.0",
     "animated-number-vue": "^1.0.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "chart.js": "^2.9.3",
     "country-code-lookup": "0.0.17",
     "google-translate-api": "^2.3.0",
